@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Garage - E-commerce de Videojuegos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-left">
+                <div class="logo" onclick="irAlHome()">
+                    <h1>The Garage</h1>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar juegos..." class="search-input">
+                    <button class="search-btn">🔍</button>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="puntos-display">
+                    <span>⭐ Puntos: <span id="puntos-usuario">0</span></span>
+                </div>
+                <button class="user-btn" id="user-btn-header">👤 Cuenta</button>
+                <button class="cart-btn" id="cart-toggle">
+                    🛒 Carrito <span class="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="container-pages">
+        <!-- PÁGINA DE INICIO -->
+        <div class="page" id="home-page">
+            <!-- BANNER PRINCIPAL -->
+            <section class="hero-banner">
+                <div class="hero-content">
+                    <h2>Bienvenido a The Garage</h2>
+                    <p>Los mejores videojuegos de todas las plataformas</p>
+                    <button class="cta-btn" onclick="irAlShop()">Ver Catálogo</button>
+                </div>
+            </section>
+
+            <!-- JUEGOS DESTACADOS -->
+            <section class="featured-section">
+                <h2>🔥 Juegos Destacados del Mes</h2>
+                <div class="featured-grid" id="featured-grid">
+                    <!-- Se generarán con JavaScript -->
+                </div>
+            </section>
+
+            <!-- MEJORES DESCUENTOS -->
+            <section class="discounts-section">
+                <h2>💰 Mejores Descuentos</h2>
+                <div class="discounts-grid" id="discounts-grid">
+                    <!-- Se generarán con JavaScript -->
+                </div>
+            </section>
+
+            <!-- SECCIÓN DE PUNTOS Y RULETA -->
+            <section class="rewards-section">
+                <div class="rewards-container">
+                    <div class="rewards-info">
+                        <h2>🎁 Sistema de Recompensas</h2>
+                        <p>Canjea tus puntos de compra por descuentos exclusivos</p>
+                        <div class="points-info">
+                            <p>Puntos actuales: <strong id="puntos-home">0</strong></p>
+                            <p>⭐ 100 puntos = 1 giro en la ruleta</p>
+                        </div>
+                        <button class="spin-btn" id="spin-btn-home" onclick="abrirRuleta()">
+                            ¡Girar la Ruleta!
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PÁGINA DE TIENDA -->
+        <div class="page" id="shop-page" style="display: none;">
+            <div class="main-container">
+                <!-- FILTROS -->
+                <aside class="sidebar">
+                    <div class="filter-section">
+                        <h2>Filtros</h2>
+                        
+                        <!-- Filtro de Consolas -->
+                        <div class="filter-group">
+                            <h3>Consolas</h3>
+                            <div class="filter-options">
+                                <label class="filter-label">
+                                    <input type="checkbox" class="console-filter" value="all" checked>
+                                    <span>Todas</span>
+                                </label>
+                                <label class="filter-label">
+                                    <input type="checkbox" class="console-filter" value="ps5">
+                                    <span>PlayStation 5</span>
+                                </label>
+                                <label class="filter-label">
+                                    <input type="checkbox" class="console-filter" value="ps4">
+                                    <span>PlayStation 4</span>
+                                </label>
+                                <label class="filter-label">
+                                    <input type="checkbox" class="console-filter" value="xbox-series">
+                                    <span>Xbox Series X|S</span>
+                                </label>
+                                <label class="filter-label">
+                                    <input type="checkbox" class="console-filter" value="xbox-one">
+                                    <span>Xbox One</span>
+                                </label>
+                                <label class="filter-label">
+                                    <input type="checkbox" class="console-filter" value="nintendo-switch">
+                                    <span>Nintendo Switch</span>
+                                </label>
+                                <label class="filter-label">
+                                    <input type="checkbox" class="console-filter" value="pc">
+                                    <span>PC</span>
+                                </label>
+                                <label class="filter-label">
+                                    <input type="checkbox" class="console-filter" value="retro">
+                                    <span>Retro</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Filtro de Precio -->
+                        <div class="filter-group">
+                            <h3>Precio</h3>
+                            <div class="price-range">
+                                <input type="range" min="0" max="100" value="100" class="price-slider" id="price-slider">
+                                <p class="price-text">Hasta: $<span id="price-value">100</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Filtro de Género -->
+                        <div class="filter-group">
+                            <h3>Género</h3>
+                            <div class="filter-options">
+                                <label class="filter-label">
+                                    <input type="checkbox" class="genre-filter" value="accion">
+                                    <span>Acción</span>
+                                </label>
+                                <label class="filter-label">
+                                    <input type="checkbox" class="genre-filter" value="rpg">
+                                    <span>RPG</span>
+                                </label>
+                                <label class="filter-label">
+                                    <input type="checkbox" class="genre-filter" value="aventura">
+                                    <span>Aventura</span>
+                                </label>
+                                <label class="filter-label">
+                                    <input type="checkbox" class="genre-filter" value="estrategia">
+                                    <span>Estrategia</span>
+                                </label>
+                                <label class="filter-label">
+                                    <input type="checkbox" class="genre-filter" value="deportes">
+                                    <span>Deportes</span>
+                                </label>
+                                <label class="filter-label">
+                                    <input type="checkbox" class="genre-filter" value="carreras">
+                                    <span>Carreras</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button class="reset-filters-btn">Limpiar Filtros</button>
+                    </div>
+                </aside>
+
+                <!-- PRODUCTOS -->
+                <main class="products-section">
+                    <div class="products-header">
+                        <h2>Catálogo de Juegos</h2>
+                        <div class="sort-options">
+                            <label for="sort">Ordenar por:</label>
+                            <select id="sort">
+                                <option value="relevancia">Relevancia</option>
+                                <option value="precio-asc">Precio: Menor a Mayor</option>
+                                <option value="precio-desc">Precio: Mayor a Menor</option>
+                                <option value="nombre">Nombre (A-Z)</option>
+                                <option value="nuevos">Más Nuevos</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- GRID DE PRODUCTOS -->
+                    <div class="products-grid" id="products-grid">
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <!-- PÁGINA DE PRODUCTO INDIVIDUAL -->
+        <div class="page" id="product-page" style="display: none;">
+            <div class="product-detail-container">
+                <button class="back-to-shop-btn" onclick="irAlShop()">← Volver al Catálogo</button>
+                
+                <div class="product-detail-content">
+                    <!-- Galería -->
+                    <div class="product-detail-gallery">
+                        <div class="product-detail-main">
+                            <div id="product-detail-main-image"></div>
+                        </div>
+                        <div class="product-gallery-grid" id="product-gallery-items"></div>
+                    </div>
+                    
+                    <!-- Información del Producto -->
+                    <div class="product-detail-info">
+                        <h1 id="product-detail-name"></h1>
+                        
+                        <div class="product-detail-specs">
+                            <div class="spec-item">
+                                <span class="spec-label">Consola:</span>
+                                <span id="product-detail-console" class="spec-value"></span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Género:</span>
+                                <span id="product-detail-genre" class="spec-value"></span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Año:</span>
+                                <span id="product-detail-year" class="spec-value"></span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Calificación:</span>
+                                <span id="product-detail-rating" class="spec-value">⭐</span>
+                            </div>
+                        </div>
+                        
+                        <div class="product-detail-pricing">
+                            <div class="price-main">
+                                <span class="price-label">Precio:</span>
+                                <span id="product-detail-price" class="price-value"></span>
+                                <span id="product-detail-original-price" class="price-original"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="product-detail-description-box">
+                            <h3>Descripción</h3>
+                            <p id="product-detail-description"></p>
+                        </div>
+                        
+                        <div class="product-detail-actions">
+                            <button class="add-to-cart-btn-large" onclick="if(productoActual) { agregarAlCarrito(productoActual.id); }">
+                                🛒 Añadir al Carrito
+                            </button>
+                            <button class="wishlist-btn-large" onclick="if(productoActual) { agregarALista(productoActual.id); }">
+                                ❤️ Mi Lista de Deseos
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PÁGINA DE TIENDA -->
+        <div class="page" id="login-page" style="display: none;">
+            <div class="login-container">
+                <div class="login-box">
+                    <h2>Iniciar Sesión</h2>
+                    <form id="login-form" onsubmit="procesarLogin(event)">
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" required placeholder="tu@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Contraseña:</label>
+                            <input type="password" id="password" required placeholder="••••••••">
+                        </div>
+                        <button type="submit" class="login-btn">Iniciar Sesión</button>
+                    </form>
+                    <p class="login-footer">¿No tienes cuenta? <a href="#" onclick="mostrarRegistro()">Regístrate aquí</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PÁGINA DE CARRITO COMPLESA -->
+        <div class="page" id="cart-page" style="display: none;">
+            <div class="cart-page-container">
+                <h2>Mi Carrito</h2>
+                <div class="cart-page-content">
+                    <div class="cart-page-items" id="cart-page-items">
+                        <p class="empty-cart">Tu carrito está vacío</p>
+                    </div>
+                    
+                    <!-- DESCUENTOS DISPONIBLES EN CARRITO -->
+                    <div id="cart-available-discounts" style="display: none;">
+                        <div class="cart-discounts-box">
+                            <h3>🎁 Tus Descuentos Disponibles</h3>
+                            <div id="cart-discounts-list" class="cart-discounts-list">
+                                <!-- Se generarán con JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DESCUENTO ACTIVO EN CARRITO -->
+                    <div id="descuento-activo-box" class="descuento-activo-box" style="display: none;">
+                        <!-- Se generará con JavaScript -->
+                    </div>
+                    
+                    <div class="cart-page-summary">
+                        <div class="summary-box">
+                            <h3>Resumen del Pedido</h3>
+                            <div class="summary-line">
+                                <span>Subtotal:</span>
+                                <span id="subtotal">$0.00</span>
+                            </div>
+                            <div class="summary-line">
+                                <span>Descuento:</span>
+                                <span id="descuento-total">$0.00</span>
+                            </div>
+                            <div class="summary-line">
+                                <span>Puntos a Ganar:</span>
+                                <span id="puntos-ganancia">0</span>
+                            </div>
+                            <div class="summary-line total">
+                                <span>Total:</span>
+                                <span id="total-cart">$0.00</span>
+                            </div>
+                            <button class="checkout-btn-full">Proceder al Pago</button>
+                            <button class="continue-shopping-btn" onclick="irAlShop()">Continuar Comprando</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PÁGINA DE RULETA -->
+        <div class="page" id="wheel-page" style="display: none;">
+            <div class="wheel-container">
+                <h2>🎡 La Ruleta de Descuentos</h2>
+                <p class="wheel-subtitle">Canjea 100 puntos por un giro</p>
+                
+                <div class="wheel-section">
+                    <div class="wheel-wrapper">
+                        <canvas id="wheelCanvas" width="400" height="400"></canvas>
+                        <button class="spin-wheel-btn" id="spin-wheel-btn" onclick="girarRuleta()">
+                            ¡GIRAR!
+                        </button>
+                    </div>
+                    
+                    <div class="wheel-info">
+                        <div class="info-box">
+                            <h3>Tus Puntos: <span id="puntos-wheel">0</span></h3>
+                            <p>Necesitas 100 puntos para girar</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-fill"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="info-box">
+                            <h3>Tu Último Descuento</h3>
+                            <p id="ultimo-descuento">Ninguno aún. ¡Realiza tu primer giro!</p>
+                        </div>
+                        
+                        <button class="back-btn" onclick="cerrarRuleta()">Volver</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PÁGINA DE PERFIL DE USUARIO -->
+        <div class="page" id="profile-page" style="display: none;">
+            <div class="profile-container">
+                <button class="back-to-home-btn" onclick="irAlHome()">← Volver</button>
+                
+                <!-- VER PERFIL -->
+                <div id="profile-view" class="profile-view">
+                    <div class="profile-header">
+                        <h1>Mi Perfil</h1>
+                        <div class="profile-stats">
+                            <div class="stat-card">
+                                <span class="stat-label">Nombre:</span>
+                                <span class="stat-value" id="profile-name">-</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-label">Email:</span>
+                                <span class="stat-value" id="profile-email">-</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-label">Puntos:</span>
+                                <span class="stat-value points-highlight" id="profile-points">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-section">
+                        <h2>🎁 Descuentos Disponibles</h2>
+                        <div id="descuentos-disponibles" class="descuentos-grid">
+                            <!-- Se generarán con JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="profile-actions">
+                        <button class="edit-profile-btn" onclick="iniciarEdicionPerfil()">✏️ Editar Perfil</button>
+                        <button class="logout-btn" onclick="cerrarSesion()">🚪 Cerrar Sesión</button>
+                    </div>
+                </div>
+
+                <!-- EDITAR PERFIL -->
+                <div id="profile-edit-form" class="profile-edit-form" style="display: none;">
+                    <h2>Editar Perfil</h2>
+                    <form onsubmit="guardarPerfil(event)">
+                        <div class="form-group">
+                            <label for="edit-nombre">Nombre:</label>
+                            <input type="text" id="edit-nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-email">Email:</label>
+                            <input type="email" id="edit-email" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="save-btn">Guardar Cambios</button>
+                            <button type="button" class="cancel-btn" onclick="cancelarEdicion()">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARRITO LATERAL (MINI) -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h2>Mi Carrito</h2>
+            <button class="close-cart" id="close-cart">✕</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <p class="empty-cart">Tu carrito está vacío</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total:</strong>
+                <span id="cart-total">$0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="irAlCarrito()">Ver Carrito Completo</button>
+        </div>
+    </div>
+
+    <!-- OVERLAY PARA CARRITO -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Sobre The Garage</h3>
+                <p>Tu tienda de confianza para los mejores videojuegos de todas las plataformas.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#products">Productos</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                    <li><a href="#terms">Términos y Condiciones</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Información</h3>
+                <p>Email: info@thegarage.com</p>
+                <p>Teléfono: +34 123 456 789</p>
+            </div>
+            <div class="footer-section">
+                <h3>Síguenos</h3>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 The Garage. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT COMENTADO (DESCOMENTA CUANDO LO NECESITES) -->
+    <script src="script.js"></script>
+</body>
+</html>
